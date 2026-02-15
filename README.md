@@ -2,8 +2,8 @@
 
 ![Filter Lists](https://img.shields.io/badge/filter_lists-2_platforms-blue)
 ![Sites Covered](https://img.shields.io/badge/sites-YouTube%20%7C%20LinkedIn%20%7C%20M365%20%7C%20General-green)
-![Auto Build](https://img.shields.io/github/actions/workflow/status/YOUR_USERNAME/my-adblock-filters/build.yml?label=build)
-![Last Commit](https://img.shields.io/github/last-commit/YOUR_USERNAME/my-adblock-filters)
+![Auto Build](https://img.shields.io/github/actions/workflow/status/andrew-hesse/adblock/build.yml?label=build)
+![Last Commit](https://img.shields.io/github/last-commit/andrew-hesse/adblock)
 
 Custom ad-blocking and cleanup filter rules maintained for two platforms: **uBlock Origin** (desktop browsers — Firefox/Brave) and **AdGuard** (mobile — iOS/Android). Each platform has its own optimized filter set, with per-site rule files that are combined via barrel files and an automated build pipeline.
 
@@ -16,7 +16,7 @@ Custom ad-blocking and cleanup filter rules maintained for two platforms: **uBlo
 3. Scroll to the bottom → **Import...** → paste this URL:
 
 ```
-https://raw.githubusercontent.com/YOUR_USERNAME/my-adblock-filters/main/ublock/all.txt
+https://raw.githubusercontent.com/andrew-hesse/adblock/main/ublock/all.txt
 ```
 
 4. Click **Apply changes**
@@ -28,7 +28,7 @@ https://raw.githubusercontent.com/YOUR_USERNAME/my-adblock-filters/main/ublock/a
 3. Tap **Add a custom filter** → paste this URL:
 
 ```
-https://raw.githubusercontent.com/YOUR_USERNAME/my-adblock-filters/main/adguard/all-flat.txt
+https://raw.githubusercontent.com/andrew-hesse/adblock/main/adguard/all-flat.txt
 ```
 
 4. Enable the filter and save
@@ -37,12 +37,12 @@ https://raw.githubusercontent.com/YOUR_USERNAME/my-adblock-filters/main/adguard/
 
 ## What's Included
 
-| File | Platform | Description |
-|------|----------|-------------|
-| `youtube.txt` | Both | Shorts removal, home page cleanup, player de-cluttering, sidebar filtering, search result cleanup, subscription/channel page improvements, navigation cleanup, tracking parameter removal |
-| `linkedin.txt` | Both | Sponsored/promoted post removal, reaction-based post filtering, Premium upsell blocking, AI feature/Copilot promo removal, sidebar cleanup, messaging widget removal, job board ad filtering, cookie consent, tracking parameter removal |
-| `microsoft365.txt` | Both | Outlook Web ad removal, Teams upgrade/promo banners, SharePoint feedback prompts, OneDrive storage upsells, Copilot promotion removal, M365 portal cleanup, Microsoft telemetry blocking, Bing/MSN ad network blocking |
-| `general.txt` | Both | Cross-site UTM/tracking parameter stripping, newsletter popup removal, push notification prompts, app download banners, third-party tracker blocking (analytics, pixels) |
+| File               | Platform | Description                                                                                                                                                                                                                              |
+| ------------------ | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `youtube.txt`      | Both     | Shorts removal, home page cleanup, player de-cluttering, sidebar filtering, search result cleanup, subscription/channel page improvements, navigation cleanup, tracking parameter removal                                                |
+| `linkedin.txt`     | Both     | Sponsored/promoted post removal, reaction-based post filtering, Premium upsell blocking, AI feature/Copilot promo removal, sidebar cleanup, messaging widget removal, job board ad filtering, cookie consent, tracking parameter removal |
+| `microsoft365.txt` | Both     | Outlook Web ad removal, Teams upgrade/promo banners, SharePoint feedback prompts, OneDrive storage upsells, Copilot promotion removal, M365 portal cleanup, Microsoft telemetry blocking, Bing/MSN ad network blocking                   |
+| `general.txt`      | Both     | Cross-site UTM/tracking parameter stripping, newsletter popup removal, push notification prompts, app download banners, third-party tracker blocking (analytics, pixels)                                                                 |
 
 ## Platform Differences
 
@@ -68,28 +68,28 @@ All basic cosmetic filters (`##`), `:has()`, `:has-text()`, `$removeparam`, `$th
 
 ### Syntax Translation Reference
 
-| Feature | uBlock Origin | AdGuard | Action |
-|---------|--------------|---------|--------|
-| Basic cosmetic | `##selector` | `##selector` | Copy as-is |
-| `:has()` | `##el:has(child)` | `##el:has(child)` | Copy as-is |
-| `:has-text()` | `##el:has-text(/regex/)` | `##el:has-text(/regex/)` | Copy as-is |
-| `:upward(n)` | `##el:upward(3)` | *Not supported* | Restructure with `:has()` or omit |
-| `:upward(sel)` | `##el:upward(div.parent)` | *Not supported* | Use `div.parent:has(el)` |
-| `:matches-attr()` | `##el:matches-attr(...)` | *Not supported* | Omit |
-| `:remove()` | `##el:remove()` | `##el { remove: true; }` | Translate syntax |
-| `:remove-attr()` | `##el:remove-attr(x)` | *Not supported* | Omit |
-| `:style()` | `##el:style(css)` | `#$#el { css }` | Translate |
-| `$xhr` | `$xhr` | `$xmlhttprequest` | Rename |
-| `$removeparam` | `$removeparam=x` | `$removeparam=x` | Copy as-is |
-| `$third-party` | `$third-party` | `$third-party` | Copy as-is |
-| Scriptlet | `+js(name, args)` | `#%#//scriptlet("name", "args")` | Translate |
-| HTML filtering | `##^selector` | `$$selector` | Different syntax |
-| CSS injection | `#$#sel { css }` | `#$#sel { css }` | Mostly compatible |
+| Feature           | uBlock Origin             | AdGuard                          | Action                            |
+| ----------------- | ------------------------- | -------------------------------- | --------------------------------- |
+| Basic cosmetic    | `##selector`              | `##selector`                     | Copy as-is                        |
+| `:has()`          | `##el:has(child)`         | `##el:has(child)`                | Copy as-is                        |
+| `:has-text()`     | `##el:has-text(/regex/)`  | `##el:has-text(/regex/)`         | Copy as-is                        |
+| `:upward(n)`      | `##el:upward(3)`          | _Not supported_                  | Restructure with `:has()` or omit |
+| `:upward(sel)`    | `##el:upward(div.parent)` | _Not supported_                  | Use `div.parent:has(el)`          |
+| `:matches-attr()` | `##el:matches-attr(...)`  | _Not supported_                  | Omit                              |
+| `:remove()`       | `##el:remove()`           | `##el { remove: true; }`         | Translate syntax                  |
+| `:remove-attr()`  | `##el:remove-attr(x)`     | _Not supported_                  | Omit                              |
+| `:style()`        | `##el:style(css)`         | `#$#el { css }`                  | Translate                         |
+| `$xhr`            | `$xhr`                    | `$xmlhttprequest`                | Rename                            |
+| `$removeparam`    | `$removeparam=x`          | `$removeparam=x`                 | Copy as-is                        |
+| `$third-party`    | `$third-party`            | `$third-party`                   | Copy as-is                        |
+| Scriptlet         | `+js(name, args)`         | `#%#//scriptlet("name", "args")` | Translate                         |
+| HTML filtering    | `##^selector`             | `$$selector`                     | Different syntax                  |
+| CSS injection     | `#$#sel { css }`          | `#$#sel { css }`                 | Mostly compatible                 |
 
 ## Repository Structure
 
 ```
-my-adblock-filters/
+adblock/
 ├── README.md
 ├── .github/
 │   └── workflows/
