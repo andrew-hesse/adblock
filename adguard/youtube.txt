@@ -77,6 +77,13 @@ youtube.com##ytd-rich-section-renderer:has-text(/Playables/i)
 ! Big yoodle
 www.youtube.com##[page-subtype="home"] #big-yoodle
 
+! ===== AD ELEMENTS =====
+
+youtube.com##ytd-display-ad-renderer
+youtube.com##ytd-promoted-sparkles-web-renderer
+youtube.com##.ytp-ad-module
+youtube.com##.branding-img-container
+
 ! ===== VIDEO PLAYER CLEANUP =====
 
 www.youtube.com##.ytp-quality-menu .ytp-menuitem:has(.ytp-premium-label)
@@ -88,6 +95,22 @@ www.youtube.com##ytd-merch-shelf-renderer
 www.youtube.com###content-section
 
 www.youtube.com##.ytp-ce-element
+www.youtube.com##.ytp-ce-element-show
+
+! Heat map chapter overlay
+www.youtube.com##.ytp-heat-map-chapter
+
+! Fullscreen quick actions and stills overlay
+www.youtube.com##.ytp-fullscreen-quick-actions
+www.youtube.com##.ytp-fullscreen-grid-stills-container
+
+! Cards teaser text and button
+youtube.com##.ytp-cards-teaser-text
+youtube.com##.ytp-cards-button-icon-default
+
+! Pause overlay annotations
+youtube.com##.annotation-type-text.annotation
+youtube.com##.ytp-scroll-min.ytp-pause-overlay
 
 www.youtube.com##ytd-watch-metadata #sponsor-button
 www.youtube.com###sponsor-button

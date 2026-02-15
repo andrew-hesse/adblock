@@ -57,6 +57,12 @@
 ##div[class*="app-download"]
 ##div[id*="app-banner"]
 
+! ===== GOOGLE SIGN-IN POPUPS =====
+
+! Google One Tap / GSI sign-in overlays on third-party sites
+||accounts.google.com/gsi/iframe$third-party
+||accounts.google.com/gsi/style$third-party
+
 ! ===== PRIVACY & TRACKING =====
 
 ! Common third-party trackers
@@ -71,8 +77,17 @@
 ||nr-data.net^$third-party
 ||sentry.io^$third-party
 
+! Google Analytics (third-party usage)
+||google-analytics.com/analytics.js$script,third-party
+||google-analytics.com/ga.js$script,third-party
+
 ! Social media tracking pixels
 ||connect.facebook.net/*/fbevents.js$script,third-party
+||facebook.com/tr$image,third-party
 ||snap.licdn.com/li.lms-analytics$script,third-party
 ||static.ads-twitter.com/uwt.js$script,third-party
 ||analytics.tiktok.com^$third-party
+
+! Social media widgets (third-party embeds)
+||platform.twitter.com/widgets.js$third-party
+||platform.linkedin.com/in.js$third-party

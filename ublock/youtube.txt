@@ -93,6 +93,14 @@ youtube.com##ytd-rich-section-renderer:has-text(/Playables/i)
 ! Big yoodle banner
 www.youtube.com##[page-subtype="home"] #big-yoodle
 
+! ===== AD ELEMENTS =====
+
+! Display ads and promoted content renderers
+youtube.com##ytd-display-ad-renderer
+youtube.com##ytd-promoted-sparkles-web-renderer
+youtube.com##.ytp-ad-module
+youtube.com##.branding-img-container
+
 ! ===== VIDEO PLAYER CLEANUP =====
 
 ! 1080p Premium upsell
@@ -107,6 +115,22 @@ www.youtube.com###content-section
 
 ! End-screen card overlays
 www.youtube.com##.ytp-ce-element
+www.youtube.com##.ytp-ce-element-show
+
+! Heat map chapter overlay
+www.youtube.com##.ytp-heat-map-chapter
+
+! Fullscreen quick actions and stills overlay
+www.youtube.com##.ytp-fullscreen-quick-actions
+www.youtube.com##.ytp-fullscreen-grid-stills-container
+
+! Cards teaser text and button
+youtube.com##.ytp-cards-teaser-text
+youtube.com##.ytp-cards-button-icon-default
+
+! Pause overlay annotations
+youtube.com##.annotation-type-text.annotation
+youtube.com##.ytp-scroll-min.ytp-pause-overlay
 
 ! Join channel membership button
 www.youtube.com##ytd-watch-metadata #sponsor-button
