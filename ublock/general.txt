@@ -1,0 +1,78 @@
+! Title: General Filters (uBlock Origin)
+! Description: Cross-site cleanup rules — tracking parameters, annoyances, privacy
+! Last modified:
+
+! ===== CROSS-SITE TRACKING PARAMETERS =====
+
+! UTM tracking parameters (used by Google Analytics)
+||*$removeparam=utm_source
+||*$removeparam=utm_medium
+||*$removeparam=utm_campaign
+||*$removeparam=utm_term
+||*$removeparam=utm_content
+||*$removeparam=utm_id
+||*$removeparam=utm_source_platform
+
+! Facebook click tracking
+||*$removeparam=fbclid
+||*$removeparam=fb_action_ids
+||*$removeparam=fb_action_types
+
+! Microsoft / Bing click tracking
+||*$removeparam=msclkid
+
+! HubSpot tracking
+||*$removeparam=_hsenc
+||*$removeparam=_hsmi
+||*$removeparam=__hstc
+||*$removeparam=__hsfp
+||*$removeparam=hsCtaTracking
+
+! Mailchimp tracking
+||*$removeparam=mc_cid
+||*$removeparam=mc_eid
+
+! General marketing trackers
+||*$removeparam=ref_src
+||*$removeparam=ref_url
+
+! ===== COMMON ANNOYANCES =====
+
+! Generic newsletter/email signup popups
+##div[class*="newsletter-popup"]
+##div[class*="newsletter-modal"]
+##div[class*="email-popup"]
+##div[class*="subscribe-popup"]
+##div[id*="newsletter-popup"]
+##div[id*="newsletter-modal"]
+
+! Generic notification permission prompts
+##div[class*="push-notification"]
+##div[class*="notification-prompt"]
+##div[class*="web-push"]
+
+! "Download our app" banners
+##div[class*="app-banner"]
+##div[class*="smart-banner"]
+##div[class*="app-download"]
+##div[id*="app-banner"]
+
+! ===== PRIVACY & TRACKING =====
+
+! Common third-party trackers
+||scorecardresearch.com^$third-party
+||quantserve.com^$third-party
+||chartbeat.com^$third-party
+||hotjar.com^$third-party
+||mouseflow.com^$third-party
+||fullstory.com^$third-party
+||clarity.ms^$third-party
+||newrelic.com^$third-party
+||nr-data.net^$third-party
+||sentry.io^$third-party
+
+! Social media tracking pixels
+||connect.facebook.net/*/fbevents.js$script,third-party
+||snap.licdn.com/li.lms-analytics$script,third-party
+||static.ads-twitter.com/uwt.js$script,third-party
+||analytics.tiktok.com^$third-party

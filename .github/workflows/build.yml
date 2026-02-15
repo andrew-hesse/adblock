@@ -1,0 +1,29 @@
+name: Build flat filter lists
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'ublock/*.txt'
+      - 'adguard/*.txt'
+      - 'scripts/build.sh'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build flat lists
+        run: bash scripts/build.sh
+
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git diff --cached --quiet || git commit -m "chore: rebuild flat filter lists"
+          git push

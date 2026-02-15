@@ -1,0 +1,217 @@
+! Title: LinkedIn Filters (uBlock Origin)
+! Description: LinkedIn cleanup — sponsored posts, reactions, upselling, sidebar, tracking
+! Last modified:
+
+! ===== PROMOTED & SPONSORED CONTENT =====
+
+! Sponsored posts via component key (most reliable)
+www.linkedin.com##div[componentkey*="sponsoredContentV2"]:upward(div[role="listitem"])
+
+! "Promoted" label posts — upward(6) is more precise than upward(8)
+www.linkedin.com##span:has-text(/^Promoted$/):upward(6)
+
+! "Suggested" algorithmic posts
+www.linkedin.com##span:has-text(/^Suggested$/):upward(6)
+www.linkedin.com##div[role="listitem"]:has-text(/Suggested/i)
+
+! XPath-based selectors for newer feed structure (data-view-name attributes)
+www.linkedin.com##:xpath(//span[text()="Promoted"]//ancestor::div/div[contains(@data-view-name,"feed-full-update")])
+www.linkedin.com##:xpath(//span[text()="Suggested"]//ancestor::div/div[contains(@data-view-name,"feed-full-update")])
+
+! Sponsored content CSS class markers
+linkedin.com##[class*='--is-sponsored']
+linkedin.com##.fie-impression-container:has-text(/Promoted/i)
+
+! Ad banner elements
+linkedin.com##.ad-banner
+linkedin.com##.ad-banner-container
+linkedin.com##iframe[src="about:blank"]
+linkedin.com##li.ad-container
+linkedin.com##div#topTextAd
+
+! Feed shared promo blocks
+linkedin.com##div.feed-shared-promo
+
+! Promoted job listings in feed
+www.linkedin.com##div[role="listitem"]:has-text(/Jobs recommended for you/i)
+
+! ===== REACTIONS & SOCIAL NOISE =====
+
+www.linkedin.com##div[role="listitem"]:has-text(/likes this|like this/i)
+www.linkedin.com##div[role="listitem"]:has-text(/loves this|love this/i)
+www.linkedin.com##div[role="listitem"]:has-text(/celebrates this|celebrate this/i)
+www.linkedin.com##div[role="listitem"]:has-text(/finds this funny|find this funny/i)
+www.linkedin.com##div[role="listitem"]:has-text(/finds this insightful|find this insightful/i)
+www.linkedin.com##div[role="listitem"]:has-text(/supports this|support this/i)
+www.linkedin.com##div[role="listitem"]:has-text(/other connections follow/i)
+
+! ===== UPSELLING & PREMIUM PROMOS =====
+
+www.linkedin.com##div[role="listitem"]:has-text(/LinkedIn Premium/i)
+www.linkedin.com##div[role="listitem"]:has-text(/Reactivate your free trial/i)
+www.linkedin.com##div[role="listitem"]:has-text(/Restart your free trial/i)
+www.linkedin.com##div[role="listitem"]:has-text(/Retry Premium for free/i)
+www.linkedin.com##div[role="listitem"]:has-text(/Open more opportunities/i)
+www.linkedin.com##div[role="listitem"]:has-text(/See all your profile viewers/i)
+
+! Premium upsell UI elements
+linkedin.com##.feed-identity-module__anchored-widget--premium-upsell
+linkedin.com##.global-nav__spotlight-upsell
+linkedin.com##.premium-upsell-link
+linkedin.com##.nav-item__try-premium
+linkedin.com##div.wvmp-upsell
+linkedin.com##div.upsell
+linkedin.com##div#insights-upsell
+linkedin.com##section.right-rail-upsell
+linkedin.com##div.premium-insights
+linkedin.com##div.insights-upsell-premium-button-container
+linkedin.com##div.insights-upsell-value-description-container
+
+! LinkedIn Learning promos
+www.linkedin.com##div[role="listitem"]:has-text(/Popular course on LinkedIn Learning/i)
+linkedin.com##.pb3.pt2.learning-top-courses
+linkedin.com##div#course-recommendations
+
+! Job search upselling
+www.linkedin.com##div[role="listitem"]:has-text(/Accelerate your job search/i)
+www.linkedin.com##div[role="listitem"]:has-text(/find a job that matches your skills/i)
+www.linkedin.com##div[role="listitem"]:has-text(/Job search smarter/i)
+www.linkedin.com##div[role="listitem"]:has-text(/Looking for a remote job/i)
+www.linkedin.com##div[role="listitem"]:has-text(/Pick up where you left off with our job search tools/i)
+www.linkedin.com##div[role="listitem"]:has-text(/See who's hiring/i)
+linkedin.com##.jymbii-top-applicant-jobs-upsell
+linkedin.com##.jobs-upsell
+
+! AI-generated content promos
+www.linkedin.com##div[role="listitem"]:has-text(/Expert answers on/i)
+
+! ===== AI FEATURES & COLLABORATIVE ARTICLES =====
+
+! AI signal icon (sparkle) — upsells Premium
+linkedin.com##[data-test-icon*="signal-ai-small"]
+
+! "Get key takeaways from this post" — Premium upsell
+linkedin.com##.artdeco-button[aria-label*="Get key takeaways from this post"]
+
+! AI coaching prompt container
+linkedin.com##.coach-shared-hscroll-bar__multi-container
+
+! Collaborative article headers and navigation
+linkedin.com##.update-components-header--with-divider
+linkedin.com##.feed-shared-conversations__navigation-context
+
+! ===== GAMES & PUZZLES PROMOS =====
+
+! LinkedIn Games / Puzzles promo in feed
+www.linkedin.com##div[role="listitem"]:has-text(/Take a break with a LinkedIn puzzle game/i)
+linkedin.com##:xpath(//p[text()[contains(.,'Take a break with a LinkedIn puzzle game')]]/../../../..)
+
+! ===== SIDEBAR & MODULES =====
+
+www.linkedin.com##.right-rail
+www.linkedin.com##.feed-follows-module
+www.linkedin.com##.ember-view.pv3.feed-shared-news-module
+www.linkedin.com##.news-module
+www.linkedin.com##.ember-view.sticky
+www.linkedin.com##aside[aria-label="LinkedIn News"]
+
+! People You May Know
+linkedin.com###pymk-container
+linkedin.com##div#pymk_cards_container li.card.guest
+linkedin.com##li.people-connect-recommend
+linkedin.com##li.people-follow-recommend
+linkedin.com##li.pymk-card.promo
+
+! Jobs/Companies/Groups sidebar widgets
+linkedin.com##div#jobsForYou
+linkedin.com##div#companiesForYou
+linkedin.com##div#groupsForYou
+
+! ===== UI DISTRACTIONS =====
+
+! Post/share box
+www.linkedin.com##.artdeco-card.share-box-feed-entry__wrapper
+www.linkedin.com##.share-box-feed-entry__wrapper
+
+! Messaging widget overlay
+www.linkedin.com##.msg-overlay-list-bubble
+linkedin.com##.msg-overlay-bubble-header
+
+! Stories carousel
+www.linkedin.com##.stories-container
+
+! Post impressions analytics
+www.linkedin.com##div[role="listitem"]:has-text(/post impressions/i)
+
+! Celebration images (work anniversaries, etc.)
+linkedin.com##:xpath(//div[contains(@class, 'feed-shared-celebration-image')])
+
+! ===== NOTIFICATIONS & ALERTS =====
+
+! Global alert container
+linkedin.com###artdeco-global-alert-container
+linkedin.com###global-alert-queue
+linkedin.com##.global-alert.global-alert--yield
+
+! Premium upgrade modal prompts
+linkedin.com##.artdeco-modal-overlay:has(.artdeco-modal:has-text(/Premium|Upgrade|Subscribe/i))
+
+! ===== COOKIE CONSENT =====
+
+linkedin.com##.cookie-consent-banner
+linkedin.com##div[data-test-id="cookie-banner"]
+linkedin.com##.cookie-consent__container
+linkedin.com##.js-consent-banner
+linkedin.com##div[id*="cookie-consent"]
+linkedin.com##div[class*="cookie-banner"]
+
+! ===== JOB BOARD =====
+
+www.linkedin.com##li:has-text(Promoted)
+www.linkedin.com##div[role="listitem"]:has-text(/Recommended for you/i)
+www.linkedin.com##div[role="listitem"]:has-text(/Events recommended for you/i)
+
+! ===== FOOTER =====
+
+linkedin.com##.global-footer-compact
+linkedin.com##div#rr-footer
+
+! ===== NETWORK FILTERS =====
+
+||linkedin.com^$removeparam=trk
+||linkedin.com^$removeparam=trkInfo
+||linkedin.com^$removeparam=originalReferer
+||linkedin.com^$removeparam=refId
+||linkedin.com^$removeparam=trackingId
+||linkedin.com^$removeparam=midToken
+||linkedin.com^$removeparam=midSig
+||linkedin.com^$removeparam=lipi
+||linkedin.com^$removeparam=licu
+||linkedin.com^$removeparam=_l
+||linkedin.com^$removeparam=eBP
+||linkedin.com^$removeparam=rcB
+||linkedin.com^$removeparam=utm_source
+||linkedin.com^$removeparam=utm_medium
+||linkedin.com^$removeparam=utm_campaign
+||linkedin.com^$removeparam=utm_content
+||linkedin.com^$removeparam=utm_term
+
+||linkedin.com/li/track$xhr
+||linkedin.com/platform-telemetry$xhr
+||lnkd.in/li/track$xhr
+||lnkd.in^$removeparam=trk
+
+||linkedin.com/voyager/api/ads$xhr
+||linkedin.com/voyager/api/voyagerGlobalAlerts$xhr
+||linkedin.com/voyager/api/voyagerClientEventsDashClientEvents$xhr
+||media.licdn.com/dms/image/*/ad-$image
+||media.licdn.com/dms/image/*/sponsored-$image
+
+! Third-party LinkedIn tracking pixels
+||linkedin.com/px$image,third-party
+||linkedin.com/collect$third-party
+||linkedin.com/conversions$third-party
+
+! LinkedIn CDN tracking parameters
+||licdn.com^$removeparam=trk
+||licdn.com^$removeparam=tracking

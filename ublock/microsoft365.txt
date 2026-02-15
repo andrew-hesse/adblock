@@ -1,0 +1,173 @@
+! Title: Microsoft 365 Filters (uBlock Origin)
+! Description: Microsoft 365 web app cleanup — Teams, Outlook, SharePoint, OneDrive, Copilot promos
+! Last modified:
+
+! ===== OUTLOOK WEB (outlook.office.com, outlook.live.com) =====
+
+! Right sidebar ad panel in Outlook.com (free tier)
+outlook.live.com##div[class*="GssVb"]
+outlook.live.com##div[class*="_3LrWF"]
+outlook.live.com##div[role="complementary"]:has(iframe)
+outlook.live.com###RightRailContainer iframe
+outlook.live.com##div[data-app-section="RightRail"]:has(iframe[src*="ads"])
+
+! "Try Premium" / "Get Microsoft 365" upsell banners
+outlook.live.com##div:has-text(/Get Microsoft 365/i):matches-attr(class="/upsell|premium|upgrade/i")
+outlook.live.com##div[class*="upsell"]
+outlook.live.com##div[class*="premium-banner"]
+outlook.live.com##a[href*="premium"][class*="upsell"]
+outlook.office.com##div[class*="upsell"]
+outlook.office.com##div[class*="premium-banner"]
+
+! Outlook focused inbox promo
+outlook.live.com##div[class*="FocusedInboxBanner"]
+outlook.office.com##div[class*="FocusedInboxBanner"]
+
+! "Discover" / "Suggested" panel items
+outlook.live.com##div[aria-label*="Suggestions"]
+outlook.live.com##div[aria-label*="Discover"]
+
+! Feedback prompts and surveys
+outlook.live.com##div[class*="feedback"]
+outlook.live.com##div[class*="survey"]
+outlook.live.com##div[role="dialog"]:has-text(/feedback|survey|rate/i)
+outlook.office.com##div[class*="feedback"]
+outlook.office.com##div[class*="survey"]
+outlook.office.com##div[role="dialog"]:has-text(/feedback|survey|rate/i)
+
+! ===== MICROSOFT TEAMS WEB (teams.microsoft.com, teams.live.com) =====
+
+! NOTE: Teams web app renders inside shadow DOM / React portals, making cosmetic
+! filtering limited. Network-level blocking is more effective for Teams.
+
+! Upgrade/Premium banners
+teams.microsoft.com##div[class*="upgrade-banner"]
+teams.microsoft.com##div[class*="premium-banner"]
+teams.microsoft.com##div[data-tid*="upgrade"]
+teams.microsoft.com##div[data-tid*="premium"]
+teams.microsoft.com##div[class*="upsell"]
+teams.live.com##div[class*="upgrade-banner"]
+teams.live.com##div[class*="upsell"]
+
+! "What's new" / feature tour popups
+teams.microsoft.com##div[class*="whats-new"]
+teams.microsoft.com##div[class*="feature-tour"]
+teams.microsoft.com##div[class*="teaching-bubble"]
+teams.microsoft.com##div[class*="coachmark"]
+teams.live.com##div[class*="whats-new"]
+teams.live.com##div[class*="teaching-bubble"]
+
+! Feedback dialogs
+teams.microsoft.com##div[role="dialog"]:has-text(/feedback|rate your experience|survey/i)
+teams.live.com##div[role="dialog"]:has-text(/feedback|rate your experience|survey/i)
+
+! ===== SHAREPOINT ONLINE (*.sharepoint.com) =====
+
+! Feedback/survey prompts
+sharepoint.com##div[class*="feedback"]
+sharepoint.com##div[class*="survey"]
+sharepoint.com##div[role="dialog"]:has-text(/feedback|survey|rate/i)
+
+! "What's new" panels
+sharepoint.com##div[class*="whats-new"]
+sharepoint.com##div[class*="teaching-bubble"]
+sharepoint.com##div[class*="coachmark"]
+
+! App promotion banners
+sharepoint.com##div[class*="app-banner"]
+sharepoint.com##div[class*="upsell"]
+
+! ===== ONEDRIVE WEB (onedrive.live.com) =====
+
+! Storage upgrade prompts
+onedrive.live.com##div[class*="upsell"]
+onedrive.live.com##div[class*="upgrade"]
+onedrive.live.com##div[class*="storage-warning"]
+onedrive.live.com##a[href*="upgradestorage"]
+onedrive.live.com##div[role="dialog"]:has-text(/upgrade your storage|get more storage/i)
+
+! Feedback prompts
+onedrive.live.com##div[class*="feedback"]
+onedrive.live.com##div[role="dialog"]:has-text(/feedback|survey|rate/i)
+
+! ===== MICROSOFT 365 PORTAL (office.com, microsoft365.com) =====
+
+! App promotion banners
+office.com##div[class*="upsell"]
+office.com##div[class*="upgrade"]
+office.com##div[class*="premium-banner"]
+microsoft365.com##div[class*="upsell"]
+microsoft365.com##div[class*="upgrade"]
+microsoft365.com##div[class*="premium-banner"]
+
+! "What's new" / feature promo banners
+office.com##div[class*="whats-new"]
+office.com##div[class*="feature-tour"]
+microsoft365.com##div[class*="whats-new"]
+microsoft365.com##div[class*="feature-tour"]
+
+! Feedback prompts
+office.com##div[class*="feedback"]
+office.com##div[role="dialog"]:has-text(/feedback|survey|rate/i)
+microsoft365.com##div[class*="feedback"]
+microsoft365.com##div[role="dialog"]:has-text(/feedback|survey|rate/i)
+
+! ===== COPILOT PROMOTION REMOVAL (cross-app) =====
+
+! Copilot sidebar/panel promos across M365 web apps
+outlook.live.com##div[class*="copilot"]:has-text(/Try Copilot|Get Copilot/i)
+outlook.office.com##div[class*="copilot"]:has-text(/Try Copilot|Get Copilot/i)
+teams.microsoft.com##div[class*="copilot"]:has-text(/Try Copilot|Get Copilot/i)
+office.com##div[class*="copilot"]:has-text(/Try Copilot|Get Copilot/i)
+microsoft365.com##div[class*="copilot"]:has-text(/Try Copilot|Get Copilot/i)
+
+! Copilot upsell buttons/badges
+outlook.live.com##button:has-text(/Copilot/i):has([class*="upsell"])
+outlook.office.com##button:has-text(/Copilot/i):has([class*="upsell"])
+teams.microsoft.com##button:has-text(/Copilot/i):has([class*="upsell"])
+
+! Copilot teaching callouts
+outlook.live.com##div[class*="teaching-bubble"]:has-text(/Copilot/i)
+outlook.office.com##div[class*="teaching-bubble"]:has-text(/Copilot/i)
+teams.microsoft.com##div[class*="teaching-bubble"]:has-text(/Copilot/i)
+office.com##div[class*="teaching-bubble"]:has-text(/Copilot/i)
+
+! ===== NETWORK FILTERS =====
+
+! Microsoft telemetry endpoints (browser/web app telemetry)
+||browser.pipe.aria.microsoft.com^$xhr
+||mobile.pipe.aria.microsoft.com^$xhr
+||self.events.data.microsoft.com^$xhr
+||functional.events.data.microsoft.com^$xhr
+||telemetry.microsoft.com^$xhr
+
+! Office web app telemetry
+||office.live.com/start/Telemetry$xhr
+||c.microsoft.com/ms.js$script
+||c.bing.com/c.gif$image
+||c1.microsoft.com/c.gif$image
+
+! Bing/MSN ad delivery in Outlook web
+||ads.msn.com^$third-party
+||adsyndication.msn.com^$third-party
+||flexrev.msn.com^$third-party
+||rad.msn.com^$third-party
+||mads.msn.com^$third-party
+
+! Microsoft advertising
+||ads.microsoft.com^$third-party
+||adnxs.com^$third-party
+||bat.bing.com^$third-party
+
+! Microsoft feedback/NPS survey endpoints
+||hubblecontent.osi.office.net^$xhr
+||oteljs.azurefd.net^$script
+||outlookmobile.live.com/api/v2/feedback$xhr
+||aka.ms/feedback$xhr
+
+! Tracking parameters on Microsoft domains
+||office.com^$removeparam=ocid
+||microsoft.com^$removeparam=ocid
+||microsoft.com^$removeparam=msockid
+||microsoft365.com^$removeparam=ocid
+||live.com^$removeparam=ocid

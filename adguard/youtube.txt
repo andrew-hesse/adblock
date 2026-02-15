@@ -1,0 +1,172 @@
+! Title: YouTube Filters (AdGuard)
+! Description: YouTube cleanup — adapted from uBO rules for AdGuard compatibility
+! Last modified:
+
+! ===== SHORTS REMOVAL =====
+
+www.youtube.com##ytd-reel-shelf-renderer
+www.youtube.com##ytd-rich-section-renderer:has(ytd-reel-shelf-renderer)
+www.youtube.com##ytd-rich-section-renderer:has(#dismissible)
+
+! Shorts sections using link-based detection (newer approach)
+www.youtube.com##ytd-rich-section-renderer:has(a[href^="/shorts/"])
+
+www.youtube.com##ytd-search ytd-reel-shelf-renderer
+www.youtube.com##ytd-search grid-shelf-view-model:has(.shortsLockupViewModelHost)
+www.youtube.com##ytd-search ytd-video-renderer:has(badge-shape[aria-label="Shorts"])
+
+youtube.com##ytd-grid-video-renderer:has([overlay-style="SHORTS"])
+youtube.com##ytd-rich-item-renderer:has([overlay-style="SHORTS"])
+youtube.com##ytd-video-renderer:has([overlay-style="SHORTS"])
+youtube.com##ytd-compact-video-renderer:has([overlay-style="SHORTS"])
+
+youtube.com##ytd-grid-video-renderer:has(#video-title:has-text(/#[Ss]horts?/))
+youtube.com##ytd-rich-item-renderer:has(#video-title:has-text(/#[Ss]horts?/))
+
+youtube.com##ytd-item-section-renderer.ytd-section-list-renderer[page-subtype="subscriptions"]:has(ytd-video-renderer:has([overlay-style="SHORTS"]))
+
+! Shorts button in sidebar (stricter matching)
+youtube.com##ytd-guide-entry-renderer:has(yt-formatted-string:has-text(/^Shorts$/i))
+youtube.com##ytd-mini-guide-entry-renderer:has(.title:has-text(/^Shorts$/i))
+
+! Shorts tab on channel pages
+youtube.com##yt-tab-shape:has-text(/^Shorts$/)
+
+! NOTE: :matches-path() not supported in AdGuard — path-aware Shorts rules omitted
+
+! Shorts Remix section
+www.youtube.com##ytd-reel-shelf-renderer:has-text(/Shorts.?Remix/i)
+
+! ===== HOME PAGE CLEANUP =====
+
+www.youtube.com##[page-subtype="home"] ytd-rich-section-renderer:has(#dismissible)
+www.youtube.com##ytd-rich-section-renderer
+www.youtube.com##ytd-shelf-renderer
+
+www.youtube.com##[page-subtype="home"] ytd-rich-item-renderer #attached-survey
+www.youtube.com##[page-subtype="home"] ytd-rich-section-renderer:has(ytd-inline-survey-renderer)
+
+! NOTE: :matches-attr() not supported in AdGuard — these rules are omitted:
+!   - Already-watched videos (>=70% progress) — uses :matches-attr()
+!   - Low view count filtering — uses complex regex with :has-text() (may partially work)
+
+! Old videos (1+ years) — :has-text with regex works in AdGuard
+www.youtube.com##[page-subtype="home"] ytd-rich-item-renderer:has(.inline-metadata-item.ytd-video-meta-block:has-text(/ years? ago$/))
+
+! Mixes/playlists
+www.youtube.com##[page-subtype="home"] ytd-rich-item-renderer:has(yt-collections-stack)
+
+! Members only
+www.youtube.com##[page-subtype="home"] ytd-rich-item-renderer:has(.badge-style-type-members-only)
+
+! Premium
+www.youtube.com##[page-subtype="home"] ytd-rich-item-renderer:has(.badge[aria-label="Premium"])
+
+! Pay to watch
+www.youtube.com##[page-subtype="home"] ytd-rich-item-renderer:has(.badge[aria-label="Pay to watch"])
+
+! Upcoming
+www.youtube.com##[page-subtype="home"] ytd-rich-item-renderer:has(ytd-thumbnail-overlay-time-status-renderer[overlay-style="UPCOMING"])
+
+! Recorded livestreams
+www.youtube.com##[page-subtype="home"] ytd-rich-item-renderer:has(.inline-metadata-item.ytd-video-meta-block:has-text(/^Streamed/))
+
+! Playables
+youtube.com##ytd-rich-section-renderer:has-text(/Playables/i)
+
+! Big yoodle
+www.youtube.com##[page-subtype="home"] #big-yoodle
+
+! ===== VIDEO PLAYER CLEANUP =====
+
+www.youtube.com##.ytp-quality-menu .ytp-menuitem:has(.ytp-premium-label)
+youtube.com##.ytp-quality-menu.ytp-panel > .ytp-panel-menu > div.ytp-menuitem:has-text(/Enhanced bitrate/i)
+
+www.youtube.com##ytd-engagement-panel-section-list-renderer[target-id="engagement-panel-ads"]
+www.youtube.com###offer-module
+www.youtube.com##ytd-merch-shelf-renderer
+www.youtube.com###content-section
+
+www.youtube.com##.ytp-ce-element
+
+www.youtube.com##ytd-watch-metadata #sponsor-button
+www.youtube.com###sponsor-button
+
+www.youtube.com##ytd-watch-metadata #actions ytd-button-renderer:has([aria-label="Thanks"])
+www.youtube.com##ytd-watch-metadata #actions ytd-button-renderer:has([aria-label="Clip"])
+www.youtube.com##ytd-watch-metadata #actions ytd-download-button-renderer
+
+! NOTE: :remove-attr() not supported in AdGuard — fullscreen scroll fix omitted
+
+! Live Chat AI Summary
+www.youtube.com###live-chat-banner > .yt-live-chat-banner-manager.style-scope:has-text(/Chat summary/i)
+
+! Seasonal doodle logo
+www.youtube.com##ytd-topbar-logo-renderer > a > ytd-yoodle-renderer
+
+! ===== SIDEBAR & RECOMMENDATIONS =====
+
+www.youtube.com##ytd-compact-video-renderer:has(.badge-style-type-members-only)
+www.youtube.com##ytd-compact-radio-renderer
+www.youtube.com##ytd-search ytd-shelf-renderer[thumbnail-style]
+www.youtube.com##ytd-search #contents > ytd-horizontal-card-list-renderer
+www.youtube.com##ytd-compact-movie-renderer
+www.youtube.com##ytd-compact-video-renderer:has(ytd-thumbnail-overlay-time-status-renderer[overlay-style="UPCOMING"])
+
+! ===== COMMENTS & CHAT =====
+
+www.youtube.com##yt-live-chat-ticker-renderer
+www.youtube.com##yt-live-chat-membership-item-renderer
+
+! ===== SEARCH RESULTS =====
+
+www.youtube.com##ytd-search ytd-movie-renderer
+www.youtube.com##ytd-search ytd-secondary-search-container-renderer:has(ytd-universal-watch-card-renderer)
+www.youtube.com##grid-shelf-view-model.ytGridShelfViewModelHostHasBottomButton
+www.youtube.com##ytd-horizontal-card-list-renderer.ytd-item-section-renderer.style-scope
+
+! ===== SUBSCRIPTIONS PAGE =====
+
+www.youtube.com##[page-subtype="subscriptions"] ytd-rich-section-renderer:has(#dismissible)
+www.youtube.com##[page-subtype="subscriptions"] ytd-rich-item-renderer:has(ytd-thumbnail-overlay-time-status-renderer[overlay-style="UPCOMING"])
+www.youtube.com##[page-subtype="subscriptions"] ytd-rich-item-renderer:has-text(Premiere)
+www.youtube.com##[page-subtype="subscriptions"] ytd-rich-item-renderer:has(.badge-style-type-members-only)
+www.youtube.com##[page-subtype="subscriptions"] ytd-rich-item-renderer:has(.badge[aria-label="Premium"])
+www.youtube.com##[page-subtype="subscriptions"] ytd-rich-item-renderer:has(.inline-metadata-item.ytd-video-meta-block:has-text(/^Streamed/))
+www.youtube.com##[page-subtype="subscriptions"] ytd-rich-item-renderer:has(.yt-badge-shape--membership)
+
+! ===== CHANNEL PAGES =====
+
+www.youtube.com##[page-subtype="channels"] #page-header-banner
+www.youtube.com##[page-subtype="channels"] ytd-section-list-renderer > #contents > ytd-item-section-renderer:has(ytd-reel-shelf-renderer)
+www.youtube.com##[page-subtype="channels"] ytd-section-list-renderer > #contents > ytd-item-section-renderer:has(ytd-recognition-shelf-renderer)
+www.youtube.com##[page-subtype="channels"] ytd-rich-item-renderer:has(.badge-style-type-members-only)
+www.youtube.com##[page-subtype="channels"] ytd-rich-item-renderer:has(.badge[aria-label="Premium"])
+
+! ===== NAVIGATION =====
+
+www.youtube.com##ytd-guide-section-renderer:has(#guide-section-title:has-text(/Explore/))
+www.youtube.com##ytd-guide-section-renderer:has(#guide-section-title:has-text(/More from YouTube/))
+www.youtube.com###masthead #center #voice-search-button
+www.youtube.com###masthead #end #buttons > ytd-button-renderer
+
+! ===== NETWORK FILTERS =====
+
+||youtube.com^$removeparam=feature
+||youtube.com^$removeparam=gclid
+||youtube.com^$removeparam=si
+||youtube.com^$removeparam=pp
+||youtube.com^$removeparam=cbrd
+||youtube.com^$removeparam=ucbcb
+
+||googlesyndication.com^$third-party
+||doubleclick.net^$third-party
+||googleadservices.com^$third-party
+||youtube.com/api/stats/ads$xmlhttprequest
+||youtube.com/pagead/$xmlhttprequest
+||youtube.com/get_midroll_$xmlhttprequest
+
+! Ad telemetry and tracking beacons
+||youtube.com/api/stats/playback$xmlhttprequest
+||youtube.com/ptracking$xmlhttprequest
+||youtube.com/api/stats/watchtime$xmlhttprequest
